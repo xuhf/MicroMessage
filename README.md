@@ -1,0 +1,1 @@
+mybatis-3-mybatis-3.2.7\src\test\java\org\apache\ibatis\submitted\complex_property
