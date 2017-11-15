@@ -15,6 +15,17 @@
     <link href="${pageContext.request.contextPath}/resources/css/bootstrap.css" rel="stylesheet" type="text/css">
     <script src="${pageContext.request.contextPath}/resources/jquery.js"></script>
     <script src="${pageContext.request.contextPath}/resources/js/bootstrap.js"></script>
+    <script type="text/javascript">
+
+        $(function () {
+            deleteBatchBtn
+        });
+
+        function deleteBatch(path) {
+            $("#deleteForm").submit();
+        }
+
+    </script>
 </head>
 <body>
 <div class="container-fluid">
@@ -43,6 +54,7 @@
                 </div>
                 <button type="submit" class="btn btn-primary">查询</button>
             </form>
+
         </div>
         <div class="col-md-2"></div>
     </div>
@@ -50,32 +62,39 @@
         <div class="col-md-2">
         </div>
         <div class="col-md-8">
-            <table class="table table-bordered">
-                <thead>
-                <tr>
-                    <th>序号</th>
-                    <th>关键字</th>
-                    <th>描述</th>
-                    <th>操作</th>
-                </tr>
-                </thead>
-                <tbody>
-                <c:forEach items="${messages}" var="item" varStatus="status">
+            <form class="form-inline" action="${pageContext.request.contextPath}/deleteBatch.action" id="deleteForm"
+                  method="post">
+                <table class="table table-bordered">
+                    <thead>
                     <tr>
-                        <td>${status.index + 1}</td>
-                        <td>${item.command}</td>
-                        <td>${item.description}</td>
-                        <td>
-                            <a class="btn btn-primary btn-sm"
-                               href="${pageContext.request.contextPath}/update.action?id=${item.id}">修改</a>
-                            <a class="btn btn-danger btn-sm"
-                               href="${pageContext.request.contextPath}/deleteOne.action?id=${item.id}">删除</a>
-                        </td>
+                        <th></th>
+                        <th>序号</th>
+                        <th>关键字</th>
+                        <th>描述</th>
+                        <th>操作</th>
                     </tr>
-                </c:forEach>
-                </tbody>
-            </table>
-            <a class="btn btn-success btn-sm" href="${pageContext.request.contextPath}/add.action">新增</a>
+                    </thead>
+                    <tbody>
+                    <c:forEach items="${messages}" var="item" varStatus="status">
+                        <tr>
+                            <td><input type="checkbox" name="id" value="${item.id}"/></td>
+                            <td>${status.index + 1}</td>
+                            <td>${item.command}</td>
+                            <td>${item.description}</td>
+                            <td>
+                                <a class="btn btn-primary btn-sm"
+                                   href="${pageContext.request.contextPath}/update.action?id=${item.id}">修改</a>
+                                <a class="btn btn-danger btn-sm"
+                                   href="${pageContext.request.contextPath}/deleteOne.action?id=${item.id}">删除</a>
+                            </td>
+                        </tr>
+                    </c:forEach>
+                    </tbody>
+                </table>
+                <a class="btn btn-success btn-sm" href="${pageContext.request.contextPath}/addInit.action">新增</a>
+                <a class="btn btn-danger btn-sm"  href="javascript:deleteBatch('${pageContext.request.contextPath}')" id="deleteBatchBtn">批量删除</a>
+                <a class="btn btn-danger btn-sm"  href="${pageContext.request.contextPath}/robot.action">自动回复</a>
+            </form>
         </div>
         <div class="col-md-2"></div>
     </div>

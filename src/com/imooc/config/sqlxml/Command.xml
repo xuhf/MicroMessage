@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.imooc.bean.Command">
+
+    <resultMap type="CommandAlias" id="CommandResult">
+        <id column="C_ID" jdbcType="INTEGER" property="id"/>
+        <result column="command" jdbcType="VARCHAR" property="command"/>
+        <result column="description" jdbcType="VARCHAR" property="description"/>
+        <collection property="contents" resultMap="com.imooc.bean.CommandContent.CommandContentResult"></collection>
+    </resultMap>
+
+    <select id="findByMybatis" parameterType="com.imooc.bean.Command" resultMap="CommandResult">
+        select c.id C_ID,c.command,c.description,cc.content , cc.id, cc.command_id
+        from command c left join command_content cc on c.id =
+        cc.command_id
+        where 1=1
+        <if test="command != null and !&quot;&quot;.equals(command)">
+            and c.command = #{command}
+        </if>
+        <if test="description != null and !&quot;&quot;.equals(description)">
+            and c.description like '%' #{description} '%'
+        </if>
+    </select>
+
+</mapper>

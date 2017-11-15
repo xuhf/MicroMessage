@@ -25,4 +25,21 @@
         delete from message where id = #{_parameter}
     </delete>
 
+    <delete id="deleteBatch" parameterType="java.util.List">
+        delete from message where id in (
+        <foreach collection="list" item="item" separator=",">
+            #{item}
+        </foreach>
+        )
+    </delete>
+
+    <insert id="add" parameterType="com.imooc.bean.Message">
+        INSERT INTO message(command,description,content)
+        VALUES(
+        #{command,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR},
+        #{content,jdbcType=VARCHAR}
+        )
+    </insert>
+
 </mapper>

@@ -8,7 +8,6 @@
         <servlet-name>ListServlet</servlet-name>
         <servlet-class>com.imooc.servlet.ListServlet</servlet-class>
     </servlet>
-
     <servlet-mapping>
         <servlet-name>ListServlet</servlet-name>
         <url-pattern>/list.action</url-pattern>
@@ -21,5 +20,50 @@
     <servlet-mapping>
         <servlet-name>DeleteOneServlet</servlet-name>
         <url-pattern>/deleteOne.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>deleteBatchServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.DeleteBatchServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>deleteBatchServlet</servlet-name>
+        <url-pattern>/deleteBatch.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addInitServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.AddInitServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addInitServlet</servlet-name>
+        <url-pattern>/addInit.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>addServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.AddServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>addServlet</servlet-name>
+        <url-pattern>/add.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>robotServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.RobotServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>robotServlet</servlet-name>
+        <url-pattern>/robot.action</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>getContentServlet</servlet-name>
+        <servlet-class>com.imooc.servlet.GetContentServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>getContentServlet</servlet-name>
+        <url-pattern>/getContent.action</url-pattern>
     </servlet-mapping>
 </web-app>
