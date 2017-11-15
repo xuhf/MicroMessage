@@ -15,13 +15,22 @@
         select c.id C_ID,c.command,c.description,cc.content , cc.id, cc.command_id
         from command c left join command_content cc on c.id =
         cc.command_id
-        where 1=1
-        <if test="command != null and !&quot;&quot;.equals(command)">
-            and c.command = #{command}
-        </if>
-        <if test="description != null and !&quot;&quot;.equals(description)">
-            and c.description like '%' #{description} '%'
-        </if>
+        <where>
+            <if test="command != null and !&quot;&quot;.equals(command)">
+                and c.command = #{command}
+            </if>
+            <if test="description != null and !&quot;&quot;.equals(description)">
+                and c.description like '%' #{description} '%'
+            </if>
+        </where>
     </select>
+
+    <insert id="add" parameterType="com.imooc.bean.Command" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO command(command,description)
+        VALUES(
+        #{command,jdbcType=VARCHAR},
+        #{description,jdbcType=VARCHAR}
+        )
+    </insert>
 
 </mapper>

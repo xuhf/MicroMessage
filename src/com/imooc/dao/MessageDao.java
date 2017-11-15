@@ -2,6 +2,7 @@ package com.imooc.dao;
 
 import com.imooc.bean.Message;
 import com.imooc.db.DBAccess;
+import com.imooc.mapper.MessageMapper;
 import org.apache.ibatis.session.SqlSession;
 
 import java.io.IOException;
@@ -63,7 +64,8 @@ public class MessageDao {
             condition.setCommand(command);
             condition.setDescription(desc);
             sqlSession = dbAccess.getsqlSqlSession();
-            messages = sqlSession.selectList("com.imooc.bean.Message.findByMybatis", condition);
+            MessageMapper mapper = sqlSession.getMapper(MessageMapper.class);
+            messages = mapper.findByMybatis(condition);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -120,5 +122,11 @@ public class MessageDao {
                 sqlSession.close();
             }
         }
+    }
+
+    public static void main(String[] args) {
+        MessageDao dao = new MessageDao();
+        List<Message> messages = dao.findByMybatis(null,null);
+        System.out.println(messages.size());
     }
 }
